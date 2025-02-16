@@ -23,7 +23,6 @@ data "archive_file" "pipelines_archive" {
   output_path = "pipelines.zip"
   source_dir = "${path.root}/repos/pipelines"
   type        = "zip"
-  depends_on = [local_file.export_variables]
 }
 
 resource "null_resource" "push_pipelines_repo_content" {
