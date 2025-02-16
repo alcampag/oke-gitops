@@ -21,7 +21,7 @@ resource "local_file" "export_variables" {
 # I am archiving just to get the sha of the folder
 data "archive_file" "pipelines_archive" {
   output_path = "pipelines.zip"
-  source_dir = "${path.root}/pipelines"
+  source_dir = "${path.root}/repos/pipelines"
   type        = "zip"
 }
 
