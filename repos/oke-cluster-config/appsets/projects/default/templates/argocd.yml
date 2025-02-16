@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: [ "missingkey=error" ]
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            cluster: in-cluster
+#  syncPolicy:
+#    preserveResourcesOnDeletion: true
+  template:
+    metadata:
+      name: "argocd-apps"
+    spec:
+      project: "default"
+      sources:
+        - repoURL: https://argoproj.github.io/argo-helm
+          chart: argo-cd
+          targetRevision: 7.8.2
+          helm:
+            releaseName: "argocd"
+            valueFiles:
+              - $values/apps/{{ "{{" }}.name{{ "}}" }}/{{ "{{" }}.destination.namespace{{ "}}" }}/argocd/values.yml
+
+        - repoURL: {{ .Values.repo }}
+          targetRevision: HEAD
+          path: apps/{{ "{{" }}.name{{ "}}" }}/{{ "{{" }}.destination.namespace{{ "}}" }}/_config_
+
+        - repoURL: {{ .Values.repo }}
+          targetRevision: HEAD
+          ref: values
+      destination:
+        server: '{{ "{{" }}.server{{ "}}" }}'
+        namespace: argocd
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated:
+          prune: true
+          selfHeal: true

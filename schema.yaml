@@ -1,0 +1,100 @@
+title: OKE GitOps Solution
+description: OKE GitOps solution based on OCI DevOps and ArgoCD
+informationalText: OKE GitOps - ArgoCD
+schemaVersion: 1.1.0
+version: "20190304"
+locale: "en"
+
+
+variableGroups:
+
+  - title: "Hidden"
+    visible: false
+    variables:
+      - tenancy_ocid
+      - region
+      - current_user_ocid
+      - compartment_ocid
+
+  - title: DevOps Project
+    variables:
+      - devops_compartment_id
+      - devops_project_name
+      - devops_project_description
+      - devops_log_group_name
+      - devops_log_group_description
+      - devops_log_retention_period_in_days
+      - notification_topic_name
+      - notification_topic_description
+
+  - title: Repository
+    variables:
+      - ocir_repo_path_prefix
+      - auth_token
+
+variables:
+
+  devops_compartment_id:
+    title: "DevOps Compartment"
+    description: "Compartments where to create the OCI DevOps project"
+    type: oci:identity:compartment:id
+    default: ${compartment_ocid}
+    required: true
+
+  devops_project_name:
+    title: "DevOps project name"
+    description: "Name of the DevOps project"
+    type: string
+    required: true
+
+  devops_project_description:
+    title: "DevOps project description"
+    description: "Description of the DevOps project"
+    type: string
+    required: false
+
+  devops_log_group_name:
+    title: "DevOps Log Group name"
+    description: "Name of the Log Group that will be created for the DevOps project"
+    type: string
+    required: true
+
+  devops_log_group_description:
+    title: "DevOps Log Group description"
+    description: "Description for the Log Group that will be created for the DevOps project"
+    type: string
+    required: false
+
+  devops_log_retention_period_in_days:
+    title: "DevOps Log Group retention"
+    description: "Number of days the DevOps project logs will be retained"
+    type: integer
+    minimum: 30
+    maximum: 180
+    multipleOf: 30
+    required: true
+
+  notification_topic_name:
+    title: "DevOps notification topic name"
+    description: "Notification topic to send notifications related to the DevOps project"
+    type: string
+    required: true
+
+  notification_topic_description:
+    title: "DevOps notification topic description"
+    description: "Description of the notification topic created for the DevOps project"
+    type: string
+    required: false
+
+  ocir_repo_path_prefix:
+    title: "OCIR Repo prefix"
+    description: "The DevOps build pipeline will create a repository with this prefix"
+    type: string
+    required: true
+
+  auth_token:
+    title: "Auth Token"
+    description: "Authentication Token of the user who is running this stack"
+    type: password
+    sensitive: true
+    required: true
