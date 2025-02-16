@@ -2,6 +2,7 @@ resource "oci_ons_notification_topic" "devops_notification_topic" {
   compartment_id = var.compartment_id
   name           = var.notification_topic_name
   description = var.notification_topic_description
+  count = var.create_notification_topic ? 1 : 0
 }
 
 resource "oci_devops_project" "devops_project" {
@@ -9,7 +10,7 @@ resource "oci_devops_project" "devops_project" {
   name           = var.devops_project_name
   description = var.devops_project_description
   notification_config {
-    topic_id = oci_ons_notification_topic.devops_notification_topic.id
+    topic_id = var.create_notification_topic? oci_ons_notification_topic.devops_notification_topic.0.id : var.notification_topic_id
   }
 }
 

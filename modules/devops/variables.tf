@@ -2,6 +2,10 @@ variable "compartment_id" {}
 variable "region" {}
 
 # NOTIFICATION
+variable "create_notification_topic" {
+  type = bool
+}
+variable "notification_topic_id" {}
 variable "notification_topic_name" {}
 variable "notification_topic_description" {}
 

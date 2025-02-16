@@ -25,9 +25,19 @@ variable "devops_log_retention_period_in_days" {
 }
 
 # NOTIFICATION
+variable "create_notification_topic" {
+  type = bool
+  default = false
+}
+
 variable "notification_topic_name" {
   default = "oke-gitops-topic"
 }
+
+variable "notification_topic_id" {
+  default = null
+}
+
 variable "notification_topic_description" {
   default = null
 }

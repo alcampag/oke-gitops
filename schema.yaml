@@ -24,6 +24,8 @@ variableGroups:
       - devops_log_group_name
       - devops_log_group_description
       - devops_log_retention_period_in_days
+      - create_notification_topic
+      - notification_topic_id
       - notification_topic_name
       - notification_topic_description
 
@@ -74,17 +76,33 @@ variables:
     multipleOf: 30
     required: true
 
+  create_notification_topic:
+    title: "Create Notification topic"
+    description: "If flagged, create a ONS topic for this DevOps project"
+    type: boolean
+
+  notification_topic_id:
+    title: "DevOps notification topic id"
+    description: "The OCID of the Notification topic to be used by the DevOps project"
+    type: string
+    required: true
+    visible:
+      not:
+        - ${create_notification_topic}
+
   notification_topic_name:
     title: "DevOps notification topic name"
     description: "Notification topic to send notifications related to the DevOps project"
     type: string
     required: true
+    visible: ${create_notification_topic}
 
   notification_topic_description:
     title: "DevOps notification topic description"
     description: "Description of the notification topic created for the DevOps project"
     type: string
     required: false
+    visible: ${create_notification_topic}
 
   ocir_repo_path_prefix:
     title: "OCIR Repo prefix"
