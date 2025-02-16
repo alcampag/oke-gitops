@@ -8,8 +8,9 @@ EOF
 
 git config --global user.email "resource-manager@oracle.com"
 git config --global user.name "$GIT_USERNAME"
-git clone $REPO_CLONE_URL || exit
 CLONED_DIR="$(basename "$REPO_CLONE_URL" .git)"
+rm -rf ./$CLONED_DIR
+git clone $REPO_CLONE_URL || exit
 rm -rf ./$CLONED_DIR/*
 cp -a ./$SOURCE_REPO/. ./$CLONED_DIR/
 cd $CLONED_DIR || exit
