@@ -11,7 +11,7 @@ resource "oci_devops_repository" "devops_pipelines_repo" {
 }
 
 resource "local_file" "export_variables" {
-  filename = "${path.root}/pipelines/variables.sh"
+  filename = "${path.root}/repos/pipelines/variables.sh"
   content = templatefile("${path.root}/templates/variables.tpl", {
     repo_compartment_id = var.compartment_id
     repo_prefix = var.ocir_repo_path_prefix
