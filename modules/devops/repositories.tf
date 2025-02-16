@@ -74,7 +74,7 @@ resource "null_resource" "push_cluster_config_repo_content" {
   }
   triggers = {
     src_hash = data.archive_file.cluster_config_archive.output_sha
-    repo_id = oci_devops_repository.devops_pipelines_repo.id
+    repo_id = oci_devops_repository.argo_repo.id
   }
   depends_on = [local_file.export_variables]
 }
