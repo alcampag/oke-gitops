@@ -64,7 +64,7 @@ resource "null_resource" "push_cluster_config_repo_content" {
   provisioner "local-exec" {
     command = "chmod +x ./script/push_repo.sh && ./script/push_repo.sh"
     environment = {
-      REPO_CLONE_URL = oci_devops_repository.devops_pipelines_repo.http_url
+      REPO_CLONE_URL = oci_devops_repository.argo_repo.http_url
       GIT_USERNAME = var.git_username
       GIT_PASSWORD = var.git_password
       REGION = var.region
