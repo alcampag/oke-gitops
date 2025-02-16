@@ -34,7 +34,7 @@ resource "null_resource" "push_pipelines_repo_content" {
       GIT_USERNAME = var.git_username
       GIT_PASSWORD = var.git_password
       REGION = var.region
-      SOURCE_REPO = "pipelines"
+      SOURCE_REPO = "repos/pipelines"
     }
     working_dir = path.root
   }
@@ -68,7 +68,7 @@ resource "null_resource" "push_cluster_config_repo_content" {
       GIT_USERNAME = var.git_username
       GIT_PASSWORD = var.git_password
       REGION = var.region
-      SOURCE_REPO = "oke-cluster-config"
+      SOURCE_REPO = "repos/oke-cluster-config"
     }
     working_dir = path.root
   }
