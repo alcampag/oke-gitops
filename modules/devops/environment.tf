@@ -7,7 +7,7 @@ resource "oci_devops_deploy_environment" "oke_environment_private" {
   network_channel {
     network_channel_type = "PRIVATE_ENDPOINT_CHANNEL"
     subnet_id            = var.oke_worker_subnet_id
-    nsg_ids = var.oke_worker_nsg_id ? [var.oke_worker_nsg_id] : null
+    nsg_ids = var.oke_worker_nsg_id != null ? [var.oke_worker_nsg_id] : null
   }
   count = var.is_oke_cluster_private ? 1 : 0
 }
