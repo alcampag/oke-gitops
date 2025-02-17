@@ -52,6 +52,17 @@ variable "auth_token" {
 
 # OKE ENVIRONMENT
 
+variable "network_compartment_id" {
+  default = null
+}
+variable "oke_compartment_id" {
+  default = null
+}
+
+variable "oke_vcn_id" {
+  default = null
+}
+
 variable "oke_cluster_id" {}
 variable "oke_environment_name" {
   default = "oke-cluster"
