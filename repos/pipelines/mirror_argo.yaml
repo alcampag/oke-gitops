@@ -59,7 +59,7 @@ steps:
   - type: Command
     name: "Push to Oracle Container Registry"
     shell: bash
-    timeoutInSeconds: 60
+    timeoutInSeconds: 400
     failImmediatelyOnError: true
     command: |
       yum -y install jq;
