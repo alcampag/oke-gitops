@@ -65,7 +65,7 @@ steps:
       yum -y install jq;
       region_key=$(oci iam region list --query "data[?name == '$region'].key | [0]" --raw-output);
       region_key=$(echo "$region_key" | tr '[:upper:]' '[:lower:]');
-      TOKEN=$(oci raw-request --http-method GET --target-uri 'https://${region_key}.ocir.io/20180419/docker/token' | jq -r .data.token);
+      TOKEN=$(oci raw-request --http-method GET --target-uri "https://${region_key}.ocir.io/20180419/docker/token" | jq -r .data.token);
       echo $TOKEN | helm registry login ${region_key}.ocir.io -u BEARER_TOKEN --password-stdin;
       helm push ${artifact}-${version}.tgz oci://${repo_path};
     onFailure:
