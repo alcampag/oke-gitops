@@ -15,6 +15,7 @@ resource "local_file" "export_variables" {
   content = templatefile("${path.root}/templates/variables.tpl", {
     repo_compartment_id = var.compartment_id
     repo_prefix = var.ocir_repo_path_prefix
+    region = var.region
   })
 }
 
