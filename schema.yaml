@@ -41,6 +41,7 @@ variableGroups:
       - oke_compartment_id
       - oke_cluster_id
       - is_oke_cluster_private
+      - notice_oke_cluster_private
       - network_compartment_id
       - oke_vcn_id
       - oke_worker_subnet_id
@@ -160,6 +161,14 @@ variables:
     title: "OKE Cluster private"
     description: "Flag this if your OKE cluster has a private Control Plane subnet"
     type: boolean
+
+  notice_oke_cluster_private:
+    title: "NOTE"
+    type: text
+    multiline: true
+    default: "NOTE that DNS MUST be enabled for the target subnet, otherwise OKE Environment creation will fail.\nAlso, NOTE that IPv6 enabled subnets are not supported."
+    required: false
+    visible: ${is_oke_cluster_private}
 
   network_compartment_id:
     title: "Network Compartment"
