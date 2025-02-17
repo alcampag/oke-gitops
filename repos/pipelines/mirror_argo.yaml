@@ -35,7 +35,7 @@ steps:
     failImmediatelyOnError: true
     command: |
       image_path=${repo_prefix}/${artifact}
-      export repo_path=$(bash ./script/create_container_registry.sh -r $image_path -c $repo_prefix -a $artifact)
+      export repo_path=$(bash ./script/create-container-registry.sh -r $image_path -c $repo_prefix -a $artifact)
     onFailure:
       - type: Command
         command: |
