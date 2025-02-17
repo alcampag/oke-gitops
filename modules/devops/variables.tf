@@ -26,3 +26,13 @@ variable "git_password" {}
 
 # TEMPLATE
 variable "ocir_repo_path_prefix" {}
+
+# OKE ENVIRONMENT
+variable "oke_cluster_id" {}
+variable "oke_environment_name" {}
+variable "oke_environment_description" {}
+variable "is_oke_cluster_private" {
+  type = bool
+}
+variable "oke_worker_subnet_id" {}
+variable "oke_worker_nsg_id" {}

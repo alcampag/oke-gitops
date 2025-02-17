@@ -34,6 +34,18 @@ variableGroups:
       - ocir_repo_path_prefix
       - auth_token
 
+  - title: OKE Environment
+    variables:
+      - oke_environment_name
+      - oke_environment_description
+      - oke_compartment_id
+      - oke_cluster_id
+      - is_oke_cluster_private
+      - network_compartment_id
+      - oke_vcn_id
+      - oke_worker_subnet_id
+      - oke_worker_nsg_id
+
 variables:
 
   devops_compartment_id:
@@ -116,3 +128,72 @@ variables:
     type: password
     sensitive: true
     required: true
+
+  oke_environment_name:
+    title: "OKE environment name"
+    description: "Name of the OKE environment where applications will be deployed"
+    type: string
+    required: true
+
+  oke_environment_description:
+    title: "OKE environment description"
+    description: "Description of the OKE environment to be created"
+    type: string
+    required: false
+
+  oke_compartment_id:
+    title: "OKE Compartment"
+    description: "Compartments where the OKE cluster is located"
+    type: oci:identity:compartment:id
+    default: ${compartment_ocid}
+    required: true
+
+  oke_cluster_id:
+    title: "OKE Cluster"
+    description: "Target OKE Cluster where applications will be deployed to"
+    type: oci:container:cluster:id
+    required: true
+    dependsOn:
+      compartmentId: ${oke_compartment_id}
+
+  is_oke_cluster_private:
+    title: "OKE Cluster private"
+    description: "Flag this if your OKE cluster has a private Control Plane subnet"
+    type: boolean
+
+  network_compartment_id:
+    title: "Network Compartment"
+    description: "Compartments where network resources for the OKE cluster are located"
+    type: oci:identity:compartment:id
+    default: ${compartment_ocid}
+    required: true
+    visible: ${is_oke_cluster_private}
+
+  oke_vcn_id:
+    title: "VCN id"
+    description: "VCN where the OKE cluster has been provisioned"
+    type: oci:core:vcn:id
+    dependsOn:
+      compartmentId: ${network_compartment_id}
+    required: true
+    visible: ${is_oke_cluster_private}
+
+  oke_worker_subnet_id:
+    title: "Worker Subnet"
+    description: "Subnet that will be used by the OCI DevOps service to deploy applications on the private OKE cluster"
+    type: oci:core:subnet:id
+    dependsOn:
+      compartmentId: ${network_compartment_id}
+      vcnId: ${oke_vcn_id}
+    required: true
+    visible: ${is_oke_cluster_private}
+
+  oke_worker_nsg_id:
+    title: "Worker NSG"
+    description: "Existing NSG to attach to the OCI DevOps subnet so that they can communicate with the private OKE Control Plane"
+    type: oci:core:nsg:id
+    dependsOn:
+      compartmentId: ${network_compartment_id}
+      vcnId: ${oke_vcn_id}
+    required: false
+    visible: ${is_oke_cluster_private}

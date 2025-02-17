@@ -49,3 +49,23 @@ variable "ocir_repo_path_prefix" {
 variable "auth_token" {
   sensitive = true
 }
+
+# OKE ENVIRONMENT
+
+variable "oke_cluster_id" {}
+variable "oke_environment_name" {
+  default = "oke-cluster"
+}
+variable "oke_environment_description" {
+  default = null
+}
+variable "is_oke_cluster_private" {
+  type = bool
+  default = false
+}
+variable "oke_worker_subnet_id" {
+  default = null
+}
+variable "oke_worker_nsg_id" {
+  default = null
+}

@@ -15,4 +15,12 @@ module "devops" {
   git_username = local.git_username
   git_password = var.auth_token
   ocir_repo_path_prefix = var.ocir_repo_path_prefix
+
+  # OKE ENVIRONMENT
+  oke_cluster_id = var.oke_cluster_id
+  oke_environment_name = var.oke_environment_name
+  oke_environment_description = var.oke_environment_description
+  is_oke_cluster_private = var.is_oke_cluster_private
+  oke_worker_subnet_id = var.oke_worker_subnet_id
+  oke_worker_nsg_id = var.oke_worker_nsg_id
 }
