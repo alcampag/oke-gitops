@@ -12,11 +12,13 @@ env:
     artifact: "argo-cd"
     version: "7.8.2"
     source_helm_repo: "https://argoproj.github.io/argo-helm"
+    namespace: "argocd"   # The Helm Chart will be deployed in this namespace
 
   exportedVariables:
     - "version"
     - "artifact"
     - "repo_path"
+    - "namespace"
 
 steps:
 

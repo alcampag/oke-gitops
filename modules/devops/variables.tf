@@ -1,5 +1,6 @@
 variable "compartment_id" {}
 variable "region" {}
+variable "tenancy_id" {}
 
 # NOTIFICATION
 variable "create_notification_topic" {

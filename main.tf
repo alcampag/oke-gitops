@@ -2,6 +2,7 @@ module "devops" {
   source = "./modules/devops"
   compartment_id = var.devops_compartment_id # Both DevOps project and OCIR will be here
   region = var.region
+  tenancy_id = var.tenancy_ocid
   create_notification_topic = var.create_notification_topic
   notification_topic_id = var.notification_topic_id
   notification_topic_name = var.notification_topic_name
