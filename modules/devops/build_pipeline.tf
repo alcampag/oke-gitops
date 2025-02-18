@@ -28,3 +28,17 @@ resource "oci_devops_build_pipeline_stage" "mirror_argocd_stage" {
   image = "OL7_X86_64_STANDARD_10"
   stage_execution_timeout_in_seconds = 36000
 }
+
+resource "oci_devops_build_pipeline_stage" "trigger_helm_deploy" {
+  build_pipeline_id         = oci_devops_build_pipeline.mirror_argocd.id
+  build_pipeline_stage_type = "TRIGGER_DEPLOYMENT_PIPELINE"
+  build_pipeline_stage_predecessor_collection {
+    items {
+      id = oci_devops_build_pipeline_stage.mirror_argocd_stage.id
+    }
+  }
+  deploy_pipeline_id = oci_devops_deploy_pipeline.deploy_pipeline_helm.id
+  description = "Trigger CD pipeline to deploy on OKE"
+  display_name = "Trigger Helm Deployment pipeline"
+  is_pass_all_parameters_enabled = true
+}
