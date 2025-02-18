@@ -23,7 +23,7 @@ resource oci_devops_deploy_stage deploy_helm_stage {
   namespace = "$${namespace}"
   oke_cluster_deploy_environment_id = var.is_oke_cluster_private ? oci_devops_deploy_environment.oke_environment_private.0.id : oci_devops_deploy_environment.oke_environment_public.0.id
   purpose      = "EXECUTE_HELM_UPGRADE"
-  release_name = "helm-release-$${artifact}-$${version}"
+  release_name = "$${artifact}"
   rollback_policy {
     policy_type = "AUTOMATED_STAGE_ROLLBACK_POLICY"
   }
