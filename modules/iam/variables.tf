@@ -1,0 +1,1 @@
+variable "compartment_id" {}
