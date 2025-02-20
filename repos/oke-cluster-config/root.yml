@@ -1,4 +1,4 @@
-# Insert repo here. This has to be applied manually
+# Insert Git repository where the cluster configurations are located, with .git postfix. This template has to be applied manually
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -10,7 +10,13 @@ spec:
   source:
     repoURL: ${REPO}
     targetRevision: HEAD
-    path: appsets/projects/default
+    path: appsets
+    helm:
+      parameters:
+        - name: project
+          value: default
+        - name: repo
+          value: ${REPO}
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

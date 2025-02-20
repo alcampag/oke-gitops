@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: argocd-apps
+  name: example-config
   namespace: argocd
 spec:
   goTemplate: true
@@ -10,33 +10,25 @@ spec:
     - clusters:
         selector:
           matchLabels:
-            cluster: in-cluster
-#  syncPolicy:
-#    preserveResourcesOnDeletion: true
+            cluster: example    # Replace with in-cluster to deploy the example namespace
   template:
     metadata:
-      name: "argocd-apps"
+      name: "example-config"
     spec:
-      project: "default"
+      project: {{ .Values.project }}
       sources:
-        - repoURL: https://argoproj.github.io/argo-helm
-          chart: argo-cd
-          targetRevision: 7.8.2
-          helm:
-            releaseName: "argocd"
-            valueFiles:
-              - $values/apps/{{ "{{" }}.name{{ "}}" }}/{{ "{{" }}.destination.namespace{{ "}}" }}/argocd/values.yml
-
         - repoURL: {{ .Values.repo }}
           targetRevision: HEAD
-          path: apps/{{ "{{" }}.name{{ "}}" }}/{{ "{{" }}.destination.namespace{{ "}}" }}/_config_
+          path: apps/{{ "{{" }}.name{{ "}}" }}/example/_config_
+          directory:
+            recurse: true
 
         - repoURL: {{ .Values.repo }}
           targetRevision: HEAD
           ref: values
       destination:
         server: '{{ "{{" }}.server{{ "}}" }}'
-        namespace: argocd
+        namespace: example
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
