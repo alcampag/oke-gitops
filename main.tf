@@ -36,4 +36,5 @@ module "iam" {
   domain_name = var.identity_domain_name
   dynamic_group_name = var.devops_dynamic_group_name
   count = var.create_iam ? 1 : 0
+  providers = {oci = oci.home}
 }

@@ -23,3 +23,8 @@ terraform {
 provider "oci" {
   region = var.region
 }
+
+provider "oci" {
+  region = element([for reg in data.oci_identity_region_subscriptions.region_subscriptions_data.region_subscriptions : reg if reg.is_home_region ],0).region_name
+  alias = "home"
+}

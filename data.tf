@@ -6,6 +6,6 @@ data "oci_identity_tenancy" "current_tenancy" {
   tenancy_id = var.tenancy_ocid
 }
 
-data "oci_identity_domains" "domains" {
-  compartment_id = var.compartment_ocid
+data "oci_identity_region_subscriptions" "region_subscriptions_data" {
+  tenancy_id = var.tenancy_ocid
 }

@@ -66,7 +66,7 @@ variables:
 
   devops_project_name:
     title: "DevOps project name"
-    description: "Name of the DevOps project"
+    description: "Name of the DevOps project. MUST BE UNIQUE in the tenancy."
     type: string
     required: true
 
@@ -229,7 +229,7 @@ variables:
 
   devops_dynamic_group_name:
     title: "DevOps dynamic group name"
-    description: "OCI DevOps dynamic group name, must be unique in the domain!"
+    description: "OCI DevOps dynamic group name, MUST BE UNIQUE in the tenancy!"
     type: string
     required: true
     visible: ${create_iam}
