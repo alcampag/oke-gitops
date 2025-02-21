@@ -25,3 +25,15 @@ module "devops" {
   oke_worker_subnet_id = var.oke_worker_subnet_id
   oke_worker_nsg_id = var.oke_worker_nsg_id
 }
+
+module "iam" {
+  source = "./modules/iam"
+  tenancy_id = var.tenancy_ocid
+  compartment_id = var.devops_compartment_id
+  network_compartment_id = var.network_compartment_id
+  oke_compartment_id = var.oke_compartment_id
+  devops_policy_name = var.devops_policy_name
+  domain_name = var.identity_domain_name
+  dynamic_group_name = var.devops_dynamic_group_name
+  count = var.create_iam ? 1 : 0
+}

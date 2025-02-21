@@ -16,6 +16,14 @@ variableGroups:
       - current_user_ocid
       - compartment_ocid
 
+  - title: Create policies
+    variables:
+      - create_iam
+      - default_policy_name
+      - identity_domain_name
+      - devops_dynamic_group_name
+      - devops_policy_name
+
   - title: DevOps Project
     variables:
       - devops_compartment_id
@@ -206,3 +214,29 @@ variables:
       vcnId: ${oke_vcn_id}
     required: false
     visible: ${is_oke_cluster_private}
+
+  create_iam:
+    title: "Create DevOps IAM policies and dynamic group"
+    description: "Let this stack create OCI DevOps policies and dynamic group"
+    type: boolean
+
+  identity_domain_name:
+    title: "Identity domain name"
+    description: "Name of the identity domain in the tenancy where to create the dynamic group"
+    type: string
+    required: true
+    visible: ${create_iam}
+
+  devops_dynamic_group_name:
+    title: "DevOps dynamic group name"
+    description: "OCI DevOps dynamic group name, must be unique in the domain!"
+    type: string
+    required: true
+    visible: ${create_iam}
+
+  devops_policy_name:
+    title: "DevOps policy name"
+    description: "Name of the policy for the OCI DevOps service"
+    type: string
+    required: true
+    visible: ${create_iam}

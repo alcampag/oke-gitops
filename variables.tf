@@ -80,3 +80,18 @@ variable "oke_worker_subnet_id" {
 variable "oke_worker_nsg_id" {
   default = null
 }
+
+# IAM
+variable "create_iam" {
+  type = bool
+  default = false
+}
+variable "devops_policy_name" {
+  default = null
+}
+variable "identity_domain_name" {
+  default = "Default"
+}
+variable "devops_dynamic_group_name" {
+  default = "DevOpsDynamicGroup"
+}
