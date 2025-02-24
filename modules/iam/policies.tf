@@ -6,7 +6,7 @@ locals {
     "Allow dynamic-group ${var.domain_name}/${var.dynamic_group_name} to read all-artifacts in compartment id ${var.compartment_id}",
     "Allow dynamic-group ${var.domain_name}/${var.dynamic_group_name} to manage cluster in compartment id ${var.oke_compartment_id}"
   ]
-  network_statements = var.network_compartment_id != null ? [
+  network_statements = var.is_oke_cluster_private != null ? [
     "Allow dynamic-group ${var.domain_name}/${var.dynamic_group_name} to use subnets in compartment id ${var.network_compartment_id}",
     "Allow dynamic-group ${var.domain_name}/${var.dynamic_group_name} to use vnics in compartment id ${var.network_compartment_id}",
     "Allow dynamic-group ${var.domain_name}/${var.dynamic_group_name} to use network-security-groups in compartment id ${var.network_compartment_id}"

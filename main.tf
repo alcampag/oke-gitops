@@ -35,6 +35,7 @@ module "iam" {
   devops_policy_name = var.devops_policy_name
   domain_name = var.identity_domain_name
   dynamic_group_name = var.devops_dynamic_group_name
+  is_oke_cluster_private = var.is_oke_cluster_private
   count = var.create_iam ? 1 : 0
   providers = {oci = oci.home}
 }
