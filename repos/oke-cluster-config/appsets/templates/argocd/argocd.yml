@@ -17,7 +17,7 @@ spec:
     preserveResourcesOnDeletion: true   # This is more of a safety mechanism that will preserve the Application if the ApplicationSet is deleted, see https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Application-Deletion/
   template:
     metadata:
-      name: "argocd"        # Include this metadata if you want your ApplicationSet to have a different name than the metadata.name
+      name: 'argocd-{{ "{{" }}.name{{ "}}" }}'        # Include this metadata if you want your ApplicationSet to have a different name than the metadata.name
     spec:
       project: {{ .Values.project }}    # The default project is always present. You might have to create multiple projects in you have multiple teams working in the same repository
       sources:

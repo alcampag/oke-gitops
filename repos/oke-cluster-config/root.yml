@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: all-apps
+  name: all-apps-in-cluster
   namespace: argocd
 spec:
   project: default

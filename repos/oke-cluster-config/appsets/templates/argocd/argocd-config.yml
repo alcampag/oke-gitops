@@ -15,7 +15,9 @@ spec:
             cluster: in-cluster
   template:
     metadata:
-      name: "argocd-config"
+      labels:
+        type: config
+      name: 'argocd-config-{{ "{{" }}.name{{ "}}" }}'
     spec:
       project: {{ .Values.project }}
       sources:
@@ -25,9 +27,6 @@ spec:
           directory:
             recurse: true
 
-        - repoURL: {{ .Values.repo }}
-          targetRevision: HEAD
-          ref: values
       destination:
         server: '{{ "{{" }}.server{{ "}}" }}'
         namespace: argocd
