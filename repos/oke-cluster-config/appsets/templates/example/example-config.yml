@@ -13,6 +13,8 @@ spec:
             cluster: example    # Replace with in-cluster to deploy the example namespace
   template:
     metadata:
+      labels:
+        type: config
       name: "example-config"
     spec:
       project: {{ .Values.project }}
@@ -23,9 +25,6 @@ spec:
           directory:
             recurse: true
 
-        - repoURL: {{ .Values.repo }}
-          targetRevision: HEAD
-          ref: values
       destination:
         server: '{{ "{{" }}.server{{ "}}" }}'
         namespace: example
