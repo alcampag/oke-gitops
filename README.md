@@ -1,3 +1,7 @@
+# REPOSIORY MOVED!
+
+New repository is located [here](https://github.com/oracle-devrel/technology-engineering/tree/main/app-dev/devops-and-containers/oke/oke-gitops)
+
 # OKE GitOps with ArgoCD
 
 This repository's objective is to get you started quickly adopting a GitOps strategy for managing your OKE cluster.
